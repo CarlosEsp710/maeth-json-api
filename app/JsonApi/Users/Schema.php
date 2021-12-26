@@ -40,15 +40,48 @@ class Schema extends SchemaProvider
 
     public function getRelationships($user, $isPrimary, array $includeRelationships)
     {
-        return [
-            'articles' => [
-                self::SHOW_RELATED => true,
-                self::SHOW_SELF => true,
-                self::SHOW_DATA => isset($includeRelationships['articles']),
-                self::DATA => function () use ($user) {
-                    return $user->articles;
-                }
-            ]
-        ];
+        if ($user->type == User::NUTRITIONIST) {
+            return [
+                'nutritionistProfile' => [
+                    self::SHOW_RELATED => true,
+                    self::SHOW_SELF => true,
+                    self::SHOW_DATA => isset($includeRelationships['nutritionistProfile']),
+                    self::DATA => function () use ($user) {
+                        return $user->nutritionistProfile;
+                    }
+                ],
+                'articles' => [
+                    self::SHOW_RELATED => true,
+                    self::SHOW_SELF => true,
+                    self::SHOW_DATA => isset($includeRelationships['articles']),
+                    self::DATA => function () use ($user) {
+                        return $user->articles;
+                    }
+                ]
+            ];
+        }
+
+        if ($user->type == User::PATIENT) {
+            return [
+                'patientProfile' => [
+                    self::SHOW_RELATED => true,
+                    self::SHOW_SELF => true,
+                    self::SHOW_DATA => isset($includeRelationships['patientProfile']),
+                    self::DATA => function () use ($user) {
+                        return $user->patientProfile;
+                    }
+                ],
+                'articles' => [
+                    self::SHOW_RELATED => true,
+                    self::SHOW_SELF => true,
+                    self::SHOW_DATA => isset($includeRelationships['articles']),
+                    self::DATA => function () use ($user) {
+                        return $user->articles;
+                    }
+                ]
+            ];
+        }
+
+        return [];
     }
 }

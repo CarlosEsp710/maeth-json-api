@@ -1,8 +1,10 @@
 <?php
 
-namespace App\JsonApi\Users;
+namespace App\JsonApi\Nutritionists;
 
 use CloudCreativity\LaravelJsonApi\Validation\AbstractValidators;
+use CloudCreativity\LaravelJsonApi\Rules\HasOne;
+use Illuminate\Validation\Rule;
 
 class Validators extends AbstractValidators
 {
@@ -13,11 +15,7 @@ class Validators extends AbstractValidators
      * @var string[]|null
      *      the allowed paths, an empty array for none allowed, or null to allow all paths.
      */
-    protected $allowedIncludePaths = [
-        'articles',
-        'nutritionistProfile',
-        'patientProfile'
-    ];
+    protected $allowedIncludePaths = ['patients'];
 
     /**
      * The sort field names a client is allowed send.
@@ -47,7 +45,13 @@ class Validators extends AbstractValidators
     protected function rules($record, array $data): array
     {
         return [
-            //
+            'curriculum' => ['required'],
+            'identification_card' => ['required'],
+            'specializations' => ['required'],
+            'user' => [
+                Rule::requiredIf(!$record),
+                new HasOne('users'),
+            ],
         ];
     }
 

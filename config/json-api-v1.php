@@ -69,6 +69,8 @@ return [
         'users' => \App\Models\User::class,
         'categories' => \App\Models\Category::class,
         'articles' => \App\Models\Article::class,
+        'nutritionists' => \App\Models\Nutritionist::class,
+        'patients' => \App\Models\Patient::class,
     ],
 
     /*

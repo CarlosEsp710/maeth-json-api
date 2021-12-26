@@ -50,7 +50,6 @@ class GenerateTestingData extends Command
         User::query()->delete();
         Article::query()->delete();
         Category::query()->delete();
-        Patient::query()->delete();
 
         $admin = User::factory()->hasArticles(1)->create([
             'first_name' => 'User ADMIN',

@@ -13,6 +13,16 @@ JsonApi::register('v1')->routes(function ($api) {
         $api->hasOne('patientProfile')->except('replace');
     });
 
+    $api->resource('nutritionists')->relationships(function ($api) {
+        $api->hasOne('user');
+        $api->hasMany('patients')->except('replace', 'add', 'remove');
+    });
+
+    $api->resource('patients')->relationships(function ($api) {
+        $api->hasOne('user');
+        $api->hasOne('nutritionist');
+    });
+
     $api->resource('categories')->relationships(function ($api) {
         $api->hasMany('articles')->except('replace', 'add', 'remove');
     });

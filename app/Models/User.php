@@ -56,4 +56,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class);
     }
+
+    public function nutritionistProfile()
+    {
+        return $this->hasOne(Nutritionist::class);
+    }
+
+    public function patientProfile()
+    {
+        return $this->hasOne(Patient::class);
+    }
 }
