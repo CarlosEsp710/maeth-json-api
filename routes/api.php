@@ -1,19 +1,40 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\API\UserController;
+use CloudCreativity\LaravelJsonApi\Facades\JsonApi;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+JsonApi::register('v1')->routes(function ($api) {
+    $api->resource('users')->relationships(function ($api) {
+        $api->hasMany('articles')->except('replace', 'add', 'remove');
+        $api->hasOne('nutritionistProfile')->except('replace');
+        $api->hasOne('patientProfile')->except('replace');
+    });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    $api->resource('categories')->relationships(function ($api) {
+        $api->hasMany('articles')->except('replace', 'add', 'remove');
+    });
+
+    $api->resource('articles')->relationships(function ($api) {
+        $api->hasOne('author');
+        $api->hasOne('category');
+    });
+
+    Route::post('login', [LoginController::class, 'login'])
+        ->name('login')
+        ->middleware('guest:sanctum');
+
+    Route::post('logout', [LoginController::class, 'logout'])
+        ->middleware('auth:sanctum')
+        ->name('logout');
+
+    Route::post('register', [RegisterController::class, 'register'])
+        ->middleware('guest:sanctum')
+        ->name('register');
+
+    Route::get('user', UserController::class)
+        ->middleware('auth:sanctum')
+        ->name('user');
 });
