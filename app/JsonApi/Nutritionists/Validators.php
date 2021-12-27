@@ -45,12 +45,19 @@ class Validators extends AbstractValidators
     protected function rules($record, array $data): array
     {
         return [
-            'curriculum' => ['required'],
-            'identification_card' => ['required'],
+            'phone_number' => ['required'],
+            'address' => ['required'],
+            'description' => ['required'],
+            'curriculum' => ['required', 'url'],
+            'identification_card' => [
+                'required',
+                Rule::unique('nutritionists')->ignore($record),
+            ],
             'specializations' => ['required'],
             'user' => [
                 Rule::requiredIf(!$record),
                 new HasOne('users'),
+                //Rule::unique('nutritionists')->ignore($record),
             ],
         ];
     }

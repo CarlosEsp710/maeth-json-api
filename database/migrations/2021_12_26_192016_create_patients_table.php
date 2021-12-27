@@ -14,12 +14,20 @@ class CreatePatientsTable extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->uuid('id')->primary();
+
+            $table->foreignUuid('user_id')->unique()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+
             $table->string('nutritionist_id');
             $table->foreign('nutritionist_id')->references('id')->on('users');
+
+            $table->string('phone_number');
+            $table->mediumText('address');
+            $table->longText('description');
+
             $table->double('height');
             $table->double('weight');
+
             $table->timestamps();
         });
     }

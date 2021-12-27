@@ -20,6 +20,8 @@ class UserFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'image_profile' => $this->faker->imageUrl(),
+            'birthday' => $this->faker->date(),
             'verified' => $this->faker->randomElement([User::ACCEPTED, User::REJECTED, User::CHECKING]),
             'verified_at' => now(),
             'type' => $this->faker->randomElement([User::PATIENT, User::NUTRITIONIST]),

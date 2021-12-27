@@ -33,6 +33,8 @@ class Schema extends SchemaProvider
         return [
             'name' => "{$user->first_name} {$user->last_name}",
             'email' => $user->email,
+            'image_profile' => $user->image_profile,
+            'birthday' => $user->birthday,
             'user_type' => $user->type,
             'status' => $user->verified,
         ];

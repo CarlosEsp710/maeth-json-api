@@ -16,17 +16,27 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
+
             $table->string('first_name');
             $table->string('last_name');
+
             $table->string('email')->unique();
             $table->string('password');
+
+            $table->string('image_profile');
+
+            $table->date('birthday');
+
             $table->enum(
                 'verified',
                 [User::ACCEPTED, User::REJECTED, User::CHECKING]
             )->default(User::CHECKING);
             $table->timestamp('verified_at')->nullable();
+
             $table->enum('type', [User::ADMIN, User::PATIENT, User::NUTRITIONIST]);
+
             $table->rememberToken();
+
             $table->timestamps();
         });
     }

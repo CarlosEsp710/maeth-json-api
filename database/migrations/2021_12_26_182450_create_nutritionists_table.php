@@ -14,11 +14,18 @@ class CreateNutritionistsTable extends Migration
     public function up()
     {
         Schema::create('nutritionists', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->uuid('id')->primary();
+
+            $table->foreignUuid('user_id')->unique()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+
+            $table->string('phone_number');
+            $table->mediumText('address');
+            $table->longText('description');
+
             $table->string('curriculum');
             $table->string('identification_card')->unique();
             $table->json('specializations');
+
             $table->timestamps();
         });
     }

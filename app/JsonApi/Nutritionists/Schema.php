@@ -30,6 +30,9 @@ class Schema extends SchemaProvider
     public function getAttributes($nutritionist)
     {
         return [
+            'phone_number' => $nutritionist->phone_number,
+            'address' => $nutritionist->address,
+            'description' => $nutritionist->description,
             'curriculum' => $nutritionist->curriculum,
             'identification_card' => $nutritionist->identification_card,
             'specializations' => $nutritionist->specializations,

@@ -13,15 +13,19 @@ JsonApi::register('v1')->routes(function ($api) {
         $api->hasOne('patientProfile')->except('replace');
     });
 
-    $api->resource('nutritionists')->relationships(function ($api) {
-        $api->hasOne('user');
-        $api->hasMany('patients')->except('replace', 'add', 'remove');
-    });
+    $api->resource('nutritionists')
+        ->only('create', 'update')
+        ->relationships(function ($api) {
+            $api->hasOne('user')->except('replace');
+            $api->hasMany('patients')->except('replace', 'add', 'remove');
+        });
 
-    $api->resource('patients')->relationships(function ($api) {
-        $api->hasOne('user');
-        $api->hasOne('nutritionist');
-    });
+    $api->resource('patients')
+        ->only('create', 'update')
+        ->relationships(function ($api) {
+            $api->hasOne('user')->except('replace');
+            $api->hasOne('nutritionist');
+        });
 
     $api->resource('categories')->relationships(function ($api) {
         $api->hasMany('articles')->except('replace', 'add', 'remove');
@@ -33,8 +37,8 @@ JsonApi::register('v1')->routes(function ($api) {
     });
 
     Route::post('login', [LoginController::class, 'login'])
-        ->name('login')
-        ->middleware('guest:sanctum');
+        ->middleware('guest:sanctum')
+        ->name('login');
 
     Route::post('logout', [LoginController::class, 'logout'])
         ->middleware('auth:sanctum')

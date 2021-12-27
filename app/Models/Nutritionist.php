@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Nutritionist extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuid;
 
     protected $guarded = [];
+
+    protected $casts = ['specializations' => 'array'];
 
     public function user()
     {

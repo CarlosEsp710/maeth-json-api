@@ -10,6 +10,9 @@ use Illuminate\Support\Collection;
 class Adapter extends AbstractAdapter
 {
     protected $fillable = [
+        'phone_number',
+        'address',
+        'description',
         'curriculum',
         'identification_card',
         'specializations',
