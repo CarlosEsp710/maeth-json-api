@@ -41,11 +41,11 @@ class RegisterController extends Controller
 
             $user->save();
 
-            $user->assignRole('patient');
+            $user->assignRole('patient', 'sanctum');
         }
 
         if ($user->type === User::NUTRITIONIST) {
-            $user->assignRole('nutritionist');
+            $user->assignRole('nutritionist', 'sanctum');
         }
 
         return new TokenResponse($user);

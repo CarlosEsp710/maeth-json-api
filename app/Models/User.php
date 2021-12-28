@@ -28,6 +28,8 @@ class User extends Authenticatable
     const ACTIVE = 1;
     const INACTIVE = 0;
 
+    protected $guard_name = 'sanctum';
+
     /**
      * The attributes that are mass assignable.
      *
