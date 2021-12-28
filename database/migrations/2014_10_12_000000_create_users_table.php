@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('image_profile');
 
             $table->date('birthday');
+            $table->enum('gender', [User::MALE, User::FEMALE]);
 
             $table->enum(
                 'verified',
@@ -34,6 +35,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('verified_at')->nullable();
 
             $table->enum('type', [User::ADMIN, User::PATIENT, User::NUTRITIONIST]);
+
+            $table->enum('status', [User::ACTIVE, User::INACTIVE])->default(User::ACTIVE);
 
             $table->rememberToken();
 

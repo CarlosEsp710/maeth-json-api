@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUuid;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,6 +21,12 @@ class User extends Authenticatable
     const ACCEPTED = 'Aceptado';
     const CHECKING = 'Validando datos';
     const REJECTED = 'Rechazado';
+
+    const MALE = 'Masculino';
+    const FEMALE = 'Femenino';
+
+    const ACTIVE = 1;
+    const INACTIVE = 0;
 
     /**
      * The attributes that are mass assignable.
@@ -51,5 +58,11 @@ class User extends Authenticatable
     public function patientProfile()
     {
         return $this->hasOne(Patient::class);
+    }
+
+    public function scopeType(Builder $query, $value)
+    {
+        $query->where('type', $value)
+            ->where('verified', User::ACCEPTED);
     }
 }

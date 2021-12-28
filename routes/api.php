@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\API\UserController;
 use CloudCreativity\LaravelJsonApi\Facades\JsonApi;
 use Illuminate\Support\Facades\Route;
@@ -51,4 +52,31 @@ JsonApi::register('v1')->routes(function ($api) {
     Route::get('user', UserController::class)
         ->middleware('auth:sanctum')
         ->name('user');
+
+    Route::get('roles', [RoleController::class, 'index'])
+        ->middleware('auth:sanctum')
+        ->name('roles.index');
+
+    Route::get('roles/{role}', [RoleController::class, 'read'])
+        ->middleware('auth:sanctum')
+        ->name('roles.read');
+
+    Route::get('permissions', [RoleController::class, 'permissions'])
+        ->middleware('auth:sanctum')
+        ->name('permissions.index');
+
+    Route::post('roles', [RoleController::class, 'create'])
+        ->middleware('auth:sanctum')
+        ->name('roles.create');
+
+    Route::patch('roles/{role}', [RoleController::class, 'update'])
+        ->middleware('auth:sanctum')
+        ->name('roles.update');
+
+    Route::delete('roles/{role}', [RoleController::class, 'delete'])
+        ->middleware('auth:sanctum')
+        ->name('roles.delete');
+
+    // Route::apiResource('roles', RoleController::class)
+    //     ->middleware('auth:sanctum');
 });

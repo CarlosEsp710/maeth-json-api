@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class Authorizer extends AbstractAuthorizer
 {
+    protected $guards = ['sanctum'];
 
     /**
      * Authorize a resource index request.
@@ -23,7 +24,7 @@ class Authorizer extends AbstractAuthorizer
      */
     public function index($type, $request)
     {
-        // TODO: Implement index() method.
+        $this->can('index', $type, $request);
     }
 
     /**
@@ -39,7 +40,7 @@ class Authorizer extends AbstractAuthorizer
      */
     public function create($type, $request)
     {
-        // TODO: Implement create() method.
+        $this->can('create', $type, $request);
     }
 
     /**
@@ -53,9 +54,9 @@ class Authorizer extends AbstractAuthorizer
      * @throws AuthenticationException|AuthorizationException
      *      if the request is not authorized.
      */
-    public function read($record, $request)
+    public function read($user, $request)
     {
-        // TODO: Implement read() method.
+        $this->can('read', $user);
     }
 
     /**
@@ -69,9 +70,9 @@ class Authorizer extends AbstractAuthorizer
      * @throws AuthenticationException|AuthorizationException
      *      if the request is not authorized.
      */
-    public function update($record, $request)
+    public function update($user, $request)
     {
-        // TODO: Implement update() method.
+        $this->can('update', $user);
     }
 
     /**
@@ -85,9 +86,8 @@ class Authorizer extends AbstractAuthorizer
      * @throws AuthenticationException|AuthorizationException
      *      if the request is not authorized.
      */
-    public function delete($record, $request)
+    public function delete($user, $request)
     {
-        // TODO: Implement delete() method.
+        $this->can('delete', $user);
     }
-
 }

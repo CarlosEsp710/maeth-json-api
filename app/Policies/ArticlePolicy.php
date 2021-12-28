@@ -24,7 +24,7 @@ class ArticlePolicy
     public function create(User $user, $request)
     {
         return $user->can('articles:create') &&
-            $user->id === $request->json('.data.relationships.author.data.id');
+            $user->id === $request->json('data.relationships.author.data.id');
     }
 
     public function read(User $user, $request)

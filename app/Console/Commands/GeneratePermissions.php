@@ -43,43 +43,198 @@ class GeneratePermissions extends Command
         // Lista de permisos
 
         //Roles
-        Permission::firstOrCreate(['name' => 'roles:admin']);
-        Permission::firstOrCreate(['name' => 'roles:index']);
-        Permission::firstOrCreate(['name' => 'roles:update']);
-        Permission::firstOrCreate(['name' => 'roles:read']);
-        Permission::firstOrCreate(['name' => 'roles:create']);
-        Permission::firstOrCreate(['name' => 'roles:delete']);
+        Permission::firstOrCreate([
+            'name' => 'roles:admin',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'roles:index',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'roles:update',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'roles:read',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'roles:create',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'roles:delete',
+            'guard_name' => 'sanctum'
+        ]);
         //Usuarios
-        Permission::firstOrCreate(['name' => 'users:admin']);
-        Permission::firstOrCreate(['name' => 'users:index']);
-        Permission::firstOrCreate(['name' => 'users:create']);
-        Permission::firstOrCreate(['name' => 'users:read']);
-        Permission::firstOrCreate(['name' => 'users:update']);
-        Permission::firstOrCreate(['name' => 'users:delete']);
+        Permission::firstOrCreate([
+            'name' => 'users:admin',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'users:index',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'users:create',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'users:read',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'users:update',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'users:delete',
+            'guard_name' => 'sanctum'
+        ]);
+        // Nutriólogos
+        Permission::firstOrCreate([
+            'name' => 'nutritionists:admin',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'nutritionists:create',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'nutritionists:update',
+            'guard_name' => 'sanctum'
+        ]);
+        // Pacientes
+        Permission::firstOrCreate([
+            'name' => 'patients:admin',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'patients:create',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'patients:update',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'patients:modify-nutritionist',
+            'guard_name' => 'sanctum'
+        ]);
         //Categorías
-        Permission::firstOrCreate(['name' => 'categories:admin']);
-        Permission::firstOrCreate(['name' => 'categories:index']);
-        Permission::firstOrCreate(['name' => 'categories:create']);
-        Permission::firstOrCreate(['name' => 'categories:read']);
-        Permission::firstOrCreate(['name' => 'categories:update']);
-        Permission::firstOrCreate(['name' => 'categories:delete']);
+        Permission::firstOrCreate([
+            'name' => 'categories:admin',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'categories:index',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'categories:create',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'categories:read',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'categories:update',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'categories:delete',
+            'guard_name' => 'sanctum'
+        ]);
         //Artículos
-        Permission::firstOrCreate(['name' => 'articles:admin']);
-        Permission::firstOrCreate(['name' => 'articles:index']);
-        Permission::firstOrCreate(['name' => 'articles:create']);
-        Permission::firstOrCreate(['name' => 'articles:read']);
-        Permission::firstOrCreate(['name' => 'articles:update']);
-        Permission::firstOrCreate(['name' => 'articles:delete']);
-        Permission::firstOrCreate(['name' => 'articles:modify-category']);
-        Permission::firstOrCreate(['name' => 'articles:modify-author']);
+        Permission::firstOrCreate([
+            'name' => 'articles:admin',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'articles:index',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'articles:create',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'articles:read',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'articles:update',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'articles:delete',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'articles:modify-category',
+            'guard_name' => 'sanctum'
+        ]);
+        Permission::firstOrCreate([
+            'name' => 'articles:modify-author',
+            'guard_name' => 'sanctum'
+        ]);
 
-        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $admin = Role::firstOrCreate([
+            'name' => 'admin',
+            'guard_name' => 'sanctum'
+        ]);
 
         $admin->givePermissionTo([
             'roles:admin',
             'users:admin',
+            'nutritionists:admin',
+            'patients:admin',
             'categories:admin',
             'articles:admin',
+        ]);
+
+        $nutritionist = Role::firstOrCreate([
+            'name' => 'nutritionist',
+            'guard_name' => 'sanctum'
+        ]);
+
+        $nutritionist->givePermissionTo([
+            'users:index',
+            'users:read',
+            'users:update',
+            'nutritionists:create',
+            'nutritionists:update',
+            'categories:index',
+            'categories:read',
+            'articles:index',
+            'articles:create',
+            'articles:read',
+            'articles:update',
+            'articles:delete',
+            'articles:modify-category'
+        ]);
+
+        $patient = Role::firstOrCreate([
+            'name' => 'patient',
+            'guard_name' => 'sanctum'
+        ]);
+
+        $patient->givePermissionTo([
+            'users:index',
+            'users:read',
+            'users:update',
+            'patients:create',
+            'patients:update',
+            'categories:index',
+            'categories:read',
+            'articles:index',
+            'articles:create',
+            'articles:read',
+            'articles:update',
+            'articles:delete',
+            'articles:modify-category'
         ]);
 
         $this->info('Permissions generated!');

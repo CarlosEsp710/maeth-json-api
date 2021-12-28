@@ -45,6 +45,11 @@ class Validators extends AbstractValidators
     protected function rules($record, array $data): array
     {
         return [
+            'phone_number' => ['required'],
+            'address' => ['required'],
+            'scholarship' => ['required'],
+            'occupation' => ['required'],
+            'description' => ['required'],
             'height' => ['required'],
             'weight' => ['required'],
             'user' => [

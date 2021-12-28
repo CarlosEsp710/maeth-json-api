@@ -18,20 +18,34 @@ class RegisterController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required',
             'type' => 'required',
+            'image_profile' => 'required|url',
+            'birthday' => 'required|date',
+            'gender' => 'required',
             'device_name' => 'required',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'type' => $request->type,
+            'image_profile' => $request->image_profile,
+            'birthday' => $request->birthday,
+            'gender' => $request->gender,
         ]);
 
-        if($user->type === User::PATIENT) {
+        if ($user->type === User::PATIENT) {
             $user->verified = User::ACCEPTED;
             $user->verified_at = now();
 
             $user->save();
+
+            $user->assignRole('patient');
+        }
+
+        if ($user->type === User::NUTRITIONIST) {
+            $user->assignRole('nutritionist');
         }
 
         return new TokenResponse($user);

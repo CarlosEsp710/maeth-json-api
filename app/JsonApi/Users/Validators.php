@@ -3,6 +3,7 @@
 namespace App\JsonApi\Users;
 
 use CloudCreativity\LaravelJsonApi\Validation\AbstractValidators;
+use Illuminate\Validation\Rule;
 
 class Validators extends AbstractValidators
 {
@@ -33,7 +34,7 @@ class Validators extends AbstractValidators
      * @var string[]|null
      *      the allowed filters, an empty array for none allowed, or null to allow all.
      */
-    protected $allowedFilteringParameters = [];
+    protected $allowedFilteringParameters = ['type'];
 
     /**
      * Get resource validation rules.
@@ -47,7 +48,13 @@ class Validators extends AbstractValidators
     protected function rules($record, array $data): array
     {
         return [
-            //
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'email' => [Rule::requiredIf(!$record)],
+            'password' => [Rule::requiredIf(!$record)],
+            'birthday' => ['required'],
+            'gender' => ['required'],
+            'type' => [Rule::requiredIf(!$record)],
         ];
     }
 

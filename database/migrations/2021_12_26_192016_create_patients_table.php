@@ -23,6 +23,8 @@ class CreatePatientsTable extends Migration
 
             $table->string('phone_number');
             $table->mediumText('address');
+            $table->string('scholarship');
+            $table->string('occupation');
             $table->longText('description');
 
             $table->double('height');

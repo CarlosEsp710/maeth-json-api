@@ -31,12 +31,15 @@ class Schema extends SchemaProvider
     public function getAttributes($user)
     {
         return [
-            'name' => "{$user->first_name} {$user->last_name}",
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
             'email' => $user->email,
             'image_profile' => $user->image_profile,
             'birthday' => $user->birthday,
+            'gender' => $user->gender,
             'user_type' => $user->type,
-            'status' => $user->verified,
+            'validation' => $user->verified,
+            'status' => $user->status
         ];
     }
 

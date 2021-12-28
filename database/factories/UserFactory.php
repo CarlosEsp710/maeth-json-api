@@ -22,9 +22,11 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'image_profile' => $this->faker->imageUrl(),
             'birthday' => $this->faker->date(),
+            'gender' => $this->faker->randomElement([User::MALE, User::FEMALE]),
             'verified' => $this->faker->randomElement([User::ACCEPTED, User::REJECTED, User::CHECKING]),
             'verified_at' => now(),
             'type' => $this->faker->randomElement([User::PATIENT, User::NUTRITIONIST]),
+            'status' => User::ACTIVE,
             'remember_token' => Str::random(10),
         ];
     }

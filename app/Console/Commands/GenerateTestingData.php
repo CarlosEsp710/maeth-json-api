@@ -51,7 +51,7 @@ class GenerateTestingData extends Command
         Article::query()->delete();
         Category::query()->delete();
 
-        $admin = User::factory()->hasArticles(1)->create([
+        $admin = User::factory()->create([
             'first_name' => 'User ADMIN',
             'last_name' => 'UNICLA',
             'email' => '20219219M@UNICLA.EDU.MX',
@@ -59,7 +59,7 @@ class GenerateTestingData extends Command
             'type' => User::ADMIN,
         ]);
 
-        $patient = User::factory()->hasArticles(1)->create([
+        $patient = User::factory()->create([
             'first_name' => 'User Patient',
             'last_name' => 'UNICLA',
             'email' => '20219220M@UNICLA.EDU.MX',
@@ -67,7 +67,7 @@ class GenerateTestingData extends Command
             'type' => User::PATIENT,
         ]);
 
-        $nutritionist = User::factory()->hasArticles(1)->create([
+        $nutritionist = User::factory()->create([
             'first_name' => 'User Nutritionist',
             'last_name' => 'UNICLA',
             'email' => '20219221M@UNICLA.EDU.MX',
@@ -76,8 +76,8 @@ class GenerateTestingData extends Command
         ]);
 
         $admin->assignRole('admin');
-        $patient->assignRole('admin');
-        $nutritionist->assignRole('admin');
+        $patient->assignRole('patient');
+        $nutritionist->assignRole('nutritionist');
 
         $this->info('Admin UUID:');
         $this->line($admin->id);
@@ -96,13 +96,5 @@ class GenerateTestingData extends Command
 
         $this->info('Token:');
         $this->line($patient->createToken('UNICLA_PATIENT')->plainTextToken);
-
-        // $articles = Article::factory(14)->create();
-
-        // $this->info('Article ID:');
-        // $this->line($user->articles->first()->slug);
-
-        // $this->info('Category ID:');
-        // $this->line($articles->first()->category->slug);
     }
 }

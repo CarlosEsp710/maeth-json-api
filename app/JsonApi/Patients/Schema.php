@@ -30,6 +30,11 @@ class Schema extends SchemaProvider
     public function getAttributes($patient)
     {
         return [
+            'phone_number' => $patient->phone_number,
+            'address' => $patient->address,
+            'scholarship' => $patient->scholarship,
+            'occupation' => $patient->occupation,
+            'description' => $patient->description,
             'weight' => $patient->weight,
             'height' => $patient->height,
         ];
