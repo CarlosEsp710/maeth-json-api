@@ -58,9 +58,9 @@ class Authorizer extends AbstractAuthorizer
      * @throws AuthenticationException|AuthorizationException
      *      if the request is not authorized.
      */
-    public function read($record, $request)
+    public function read($nutritionist, $request)
     {
-        // TODO: Implement read() method.
+        $this->authenticate();
     }
 
     /**

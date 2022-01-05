@@ -11,14 +11,15 @@ class PatientPolicy
 
     public function create(User $user, $request)
     {
-        //$user->can('nutritionist:create')
-        return  $user->type === User::PATIENT
+        return $user->can('patients:create')
+            &&  $user->type === User::PATIENT
             && $user->id === $request->json('data.relationships.user.data.id');
     }
 
-    public function update(User $user, $nutritionist)
+    public function update(User $user, $patient)
     {
-        //$user->can('articles:update') &&
-        return  $nutritionist->user->is($user);
+        return  $user->can('patients:update')
+            && $user->type === User::NUTRITIONIST
+            &&  $patient->user->is($user);
     }
 }

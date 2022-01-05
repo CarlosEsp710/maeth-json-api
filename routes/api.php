@@ -14,14 +14,14 @@ JsonApi::register('v1')->routes(function ($api) {
     });
 
     $api->resource('nutritionists')
-        ->only('create', 'update')
+        ->only('read', 'create', 'update')
         ->relationships(function ($api) {
             $api->hasOne('user')->except('replace');
             $api->hasMany('patients')->except('replace', 'add', 'remove');
         });
 
     $api->resource('patients')
-        ->only('create', 'update')
+        ->only('read', 'create', 'update')
         ->relationships(function ($api) {
             $api->hasOne('user')->except('replace');
             $api->hasOne('nutritionist');
