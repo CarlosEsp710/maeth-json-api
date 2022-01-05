@@ -3,7 +3,6 @@
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\API\UserController;
 use CloudCreativity\LaravelJsonApi\Facades\JsonApi;
 use Illuminate\Support\Facades\Route;
 
@@ -48,10 +47,6 @@ JsonApi::register('v1')->routes(function ($api) {
     Route::post('register', [RegisterController::class, 'register'])
         ->middleware('guest:sanctum')
         ->name('register');
-
-    Route::get('user', UserController::class)
-        ->middleware('auth:sanctum')
-        ->name('user');
 
     Route::get('roles', [RoleController::class, 'index'])
         ->middleware('auth:sanctum')
