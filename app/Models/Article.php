@@ -56,7 +56,7 @@ class Article extends Model
 
     public function scopeSearch(Builder $query, $values)
     {
-        foreach (Str::of($values)->explode(' ') as $value) {
+        foreach (Str::of($values)->explode(',') as $value) {
             $query->orWhere('title', 'LIKE', "%{$value}%")
                 ->orWhere('content', 'LIKE', "%{$value}%");
         }

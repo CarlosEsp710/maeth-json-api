@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -60,6 +61,13 @@ class User extends Authenticatable
     public function patientProfile()
     {
         return $this->hasOne(Patient::class);
+    }
+
+    public function scopeId(Builder $query, $values)
+    {
+        foreach (Str::of($values)->explode(',') as $value) {
+            $query->orWhere('id', $value);
+        }
     }
 
     public function scopeType(Builder $query, $value)
