@@ -40,6 +40,10 @@ JsonApi::register('v1')->routes(function ($api) {
         ->middleware('guest:sanctum')
         ->name('login');
 
+    Route::post('renew', [LoginController::class, 'renew'])
+        ->middleware('auth:sanctum')
+        ->name('renew');
+
     Route::post('logout', [LoginController::class, 'logout'])
         ->middleware('auth:sanctum')
         ->name('logout');

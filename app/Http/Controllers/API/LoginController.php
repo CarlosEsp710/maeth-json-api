@@ -30,6 +30,15 @@ class LoginController extends Controller
         return new TokenResponse($user);
     }
 
+    public function renew(Request $request)
+    {
+        $request->validate(['device_name' => 'required']);
+
+        $request->user->currentAccessToken->delete();
+
+        return new TokenResponse($request->user);
+    }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
