@@ -14,6 +14,8 @@ class TokenResponse implements Responsable
 
     public function toResponse($request)
     {
+        $this->user->currentAccessToken()->delete();
+
         return response()->json([
             'user_id' => $this->user->id,
             'plain-text-token' => $this->user->createToken($request->device_name)->plainTextToken
