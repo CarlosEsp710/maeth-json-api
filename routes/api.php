@@ -28,6 +28,8 @@ JsonApi::register('v1')->routes(function ($api) {
             $api->hasMany('reports')->except('replace', 'add');
         });
 
+    $api->resource('reports')->only('read', 'create', 'delete');
+
     $api->resource('categories')->relationships(function ($api) {
         $api->hasMany('articles')->except('replace', 'add', 'remove');
     });
