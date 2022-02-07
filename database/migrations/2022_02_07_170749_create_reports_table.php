@@ -16,15 +16,15 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
 
-            $table->string('clinical_indicators');
-            $table->string('family_background');
-            $table->string('gynecological_history')->nullable();
-            $table->string('life_style');
-            $table->string('daily_routine');
-            $table->string('dietary_indicators');
-            $table->string('food_characteristics');
-            $table->string('consumption_variants');
-            $table->string('usual_diet');
+            $table->longText('clinical_indicators');
+            $table->longText('family_background');
+            $table->longText('gynecological_history')->nullable();
+            $table->longText('life_style');
+            $table->longText('daily_routine');
+            $table->longText('dietary_indicators');
+            $table->longText('food_characteristics');
+            $table->longText('consumption_variants');
+            $table->longText('usual_diet');
 
             $table->string('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients');
