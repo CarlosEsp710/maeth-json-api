@@ -71,6 +71,7 @@ return [
         'articles' => \App\Models\Article::class,
         'nutritionists' => \App\Models\Nutritionist::class,
         'patients' => \App\Models\Patient::class,
+        'reports' => \App\Models\Report::class,
     ],
 
     /*

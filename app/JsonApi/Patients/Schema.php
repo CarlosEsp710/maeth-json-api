@@ -51,7 +51,15 @@ class Schema extends SchemaProvider
                 self::DATA => function () use ($patient) {
                     return $patient->nutritionist;
                 }
-            ]
+            ],
+            'reports' => [
+                self::SHOW_RELATED => true,
+                self::SHOW_SELF => true,
+                self::SHOW_DATA => isset($includeRelationships['reports']),
+                self::DATA => function () use ($patient) {
+                    return $patient->reports;
+                }
+            ],
         ];
     }
 }

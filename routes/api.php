@@ -25,6 +25,7 @@ JsonApi::register('v1')->routes(function ($api) {
         ->relationships(function ($api) {
             $api->hasOne('user')->except('replace');
             $api->hasOne('nutritionist');
+            $api->hasMany('reports')->except('replace', 'add');
         });
 
     $api->resource('categories')->relationships(function ($api) {

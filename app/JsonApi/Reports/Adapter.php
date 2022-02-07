@@ -1,6 +1,6 @@
 <?php
 
-namespace App\JsonApi\Patients;
+namespace App\JsonApi\Reports;
 
 use CloudCreativity\LaravelJsonApi\Eloquent\AbstractAdapter;
 use CloudCreativity\LaravelJsonApi\Pagination\StandardStrategy;
@@ -9,16 +9,18 @@ use Illuminate\Support\Collection;
 
 class Adapter extends AbstractAdapter
 {
+
     protected $fillable = [
-        'phone_number',
-        'address',
-        'description',
-        'scholarship',
-        'occupation',
-        'height',
-        'weight',
-        'user',
-        'nutritionist'
+        'clinical_indicators',
+        'family_background',
+        'gynecological_history',
+        'life_style',
+        'daily_routine',
+        'dietary_indicators',
+        'food_characteristics',
+        'consumption_variants',
+        'usual_diet',
+        'patient',
     ];
 
     /**
@@ -42,7 +44,7 @@ class Adapter extends AbstractAdapter
      */
     public function __construct(StandardStrategy $paging)
     {
-        parent::__construct(new \App\Models\Patient(), $paging);
+        parent::__construct(new \App\Models\Report(), $paging);
     }
 
     /**
@@ -55,23 +57,13 @@ class Adapter extends AbstractAdapter
         $this->filterWithScopes($query, $filters);
     }
 
-    public function fillAttributes($patient, Collection $attributes)
+    public function fillAttributes($report, Collection $attributes)
     {
-        $patient->fill($attributes->only($this->fillable)->toArray());
+        $report->fill($attributes->only($this->fillable)->toArray());
     }
 
-    public function user()
+    public function patient()
     {
         return $this->belongsTo();
-    }
-
-    public function nutritionist()
-    {
-        return $this->belongsTo();
-    }
-
-    public function reports()
-    {
-        return $this->hasMany();
     }
 }
