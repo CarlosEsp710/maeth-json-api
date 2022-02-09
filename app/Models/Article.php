@@ -34,6 +34,13 @@ class Article extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
+    public function scopeId(Builder $query, $values)
+    {
+        foreach (Str::of($values)->explode(',') as $value) {
+            $query->orWhere('id', $value);
+        }
+    }
+
     public function scopeTitle(Builder $query, $value)
     {
         $query->where('title', 'LIKE', "%{$value}%");
