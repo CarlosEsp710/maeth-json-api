@@ -19,7 +19,7 @@ class PatientPolicy
     public function update(User $user, $patient)
     {
         return  $user->can('patients:update')
-            && $user->type === User::NUTRITIONIST
+            && $user->type === User::PATIENT
             &&  $patient->user->is($user);
     }
 }
